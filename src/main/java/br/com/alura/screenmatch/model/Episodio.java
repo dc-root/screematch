@@ -100,10 +100,10 @@ public class Episodio {
 
     @Override
     public String toString() {
-        return "temporada=" + temporada +
-                ", titulo='" + titulo + '\'' +
-                ", numeroEpisodio=" + numeroEpisodio +
-                ", avaliacao=" + avaliacao +
-                ", dataLancamento=" + dataLancamento ;
+        return "\n\ttemporada: " + temporada +
+                ", titulo: '" + titulo + '\'' +
+                ", numero ep: " + numeroEpisodio +
+                ", avaliacao: " + avaliacao +
+                ", data Lancamento: " + dataLancamento ;
     }
 }

@@ -34,6 +34,9 @@ public class Principal {
                     3 - Listar series registradas
                     4 - Buscar serie por titulo
                     5 - Buscar series por temporada e avaliação
+                    6 - Buscar episodio por trecho
+                    7 - Top 5 episodios por serie
+                    8 - Buscar episodios por data de lançamento
                     0 - Sair
                     """);
             System.out.print(": ");
@@ -58,6 +61,15 @@ public class Principal {
                     break;
                 case 5:
                     listarSeriesPorTemporadasEAvaliacao();
+                    break;
+                case 6:
+                    listarEpisodiosPorTrecho();
+                    break;
+                case 7:
+                    listarTopEpisodiosPorSerie();
+                    break;
+                case 8:
+                    listarEpisodiosPorDada();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -161,5 +173,38 @@ public class Principal {
         series.forEach(serie -> {
             System.out.println(serie.getTitulo()+" | "+serie.getTotalTemporadas()+" | "+serie.getAvaliacao());
         });
+    }
+    private void listarEpisodiosPorTrecho() {
+        System.out.println("Trecho do nome do episódio: ");
+        var trechoDoEp = leitura.nextLine();
+
+        List<Episodio> foundEpisodio = serieRepository.findEpisodiosPorTrecho(trechoDoEp);
+
+        foundEpisodio.forEach(episodio -> {
+            System.out.println(episodio.getTitulo()+" | ep: "+episodio.getNumeroEpisodio()+" | serie: "+episodio.getSerie().getTitulo());
+        });
+    }
+
+    private void listarTopEpisodiosPorSerie() {
+        System.out.println("De qual série?");
+        var nomeSerie = leitura.nextLine();
+
+        List<Episodio> episodios = serieRepository.findTopEpisodiosPorSerie(nomeSerie);
+
+        episodios.forEach(episodio -> {
+            System.out.println("serie: "+episodio.getSerie().getTitulo()+" | titulo ep: "+episodio.getTitulo()+" | num. ep: "+episodio.getNumeroEpisodio()+" | avaliação: "+episodio.getAvaliacao());
+        });
+    }
+
+    private void listarEpisodiosPorDada() {
+        System.out.println("De qual série?");
+        var nomeSerie = leitura.nextLine();
+
+        System.out.println("Qual o ano de lançamento?");
+        var anoLancamento = leitura.nextInt();
+        leitura.nextLine();
+
+        List<Episodio> episodios = serieRepository.findEpisodiosPorSereEAno(nomeSerie, anoLancamento);
+        episodios.forEach(System.out::println);
     }
 }
