@@ -174,6 +174,7 @@ public class Principal {
             System.out.println(serie.getTitulo()+" | "+serie.getTotalTemporadas()+" | "+serie.getAvaliacao());
         });
     }
+
     private void listarEpisodiosPorTrecho() {
         System.out.println("Trecho do nome do episódio: ");
         var trechoDoEp = leitura.nextLine();
